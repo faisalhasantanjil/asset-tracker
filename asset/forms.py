@@ -20,4 +20,17 @@ class EmployeeForm(ModelForm):
 
     class Meta:
         model = EmployeeInformation
-        exclude = ("user",)
+        exclude = ("company",)
+
+
+class AssetAssignForm(ModelForm):
+
+    class Meta:
+        model = AssetTrack
+        exclude = ("company","return_date","return_time","return_condition","return_condition_log","status")
+
+class AssetUpdateForm(ModelForm):
+
+    class Meta:
+        model = AssetTrack
+        exclude = ("company")

@@ -39,7 +39,12 @@ class AssetTrack (models.Model):
         ('Damage', 'Damage'),
         ('Others', 'Others')
     ]
-    
+    STATUS = [
+        ('Pending', 'Pending'),
+        ('Returned', 'Returned'),
+        ('No Return', 'No Return'),
+        
+    ]
     
     name = models.CharField(max_length=100, blank=True, null=True, default='')
     category = models.CharField(max_length=20, null=True, blank=True, choices=CATEGORY)
@@ -57,3 +62,7 @@ class AssetTrack (models.Model):
         blank=True, null=True, default='Not Mentioned')
     return_condition = models.CharField(max_length=20, null=True, blank=True, choices=CONDITION)
     return_condition_log = models.CharField(max_length=500, blank=True, null=True, default='')
+    status = models.CharField(max_length=20, null=True, blank=True, choices=STATUS, default='Pending')
+    
+    def __str__(self):
+        return self.name
