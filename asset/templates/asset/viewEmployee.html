@@ -1,0 +1,39 @@
+{% extends 'asset/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 ">
+    <p class="h2 text-center text-decoration-underline pb-3">Employee List</p>
+    
+    <table class="table table-striped w-75 mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Designation</th>
+                <th scope="col">More Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{employee.name}}</td>
+                <td>{{employee.designation}}</td>
+                <td> {{employee.email}}</td>
+                <td>
+                    
+                        <button class="btn btn-secondary"><a
+                            href="{% url 'employeedetails' employee.id %}" class="text-decoration-none"
+                            style="color: black;"> View details</a></button>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% load static %}
+
+<div class="">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light mx-auto" style="background-color: #dde7e7;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">AssetTracker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url "signin" %}>Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url "signout" %} >signout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url "addemployee" %} >Add Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url "addemployee" %} >Add Employee</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url "employeelist" %} >View Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href= {% url "signout" %} >Asset Asign</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+
+
+                {% if user.is_authenticated %}
+                <button type="button" class="mx-3 btn btn-dark btn-sm" disabled="disabled">
+                    <p class="">{{user}}</p>
+                </button>
+        
+                <button type="button" class=" ml-1 btn btn-sm btn-outline-secondary rounded-pill"
+                    style="box-shadow: 0 4px 8px 0 rgba(15, 13, 13, 0.2);">
+                    <a href={% url 'signout' %} class="link-dark text-decoration-none">Logout</a>
+                </button>
+
+                {% else %}
+                <button type="button" class="btn btn-outline-light ml-1 " style="box-shadow: 0 4px 8px 0 rgba(53, 52, 52, 0.2);
+">
+
+                    <a href={% url 'signin' %} class="link-dark text-decoration-none">Login</a>
+                </button>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+    </nav>
+</div>
