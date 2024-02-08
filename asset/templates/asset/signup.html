@@ -1,15 +1,13 @@
 {% extends 'asset/base.html' %}
 {% block content %}
 
-<div class="card bg-glass">
-    <div class="card-body px-4 py-5 px-md-5">
+<div class="w-75 mx-auto">
+    <div class="px-4 py-5 px-md-5">
       <form action="" method="post">
         {% csrf_token %}
-        {{form_a.as_p}}
         {{form_b.as_p}}
-
+        {{form_a.as_p}}
         <input type="submit" value="Confirm">
-
       </form>
     </div>
 </div>

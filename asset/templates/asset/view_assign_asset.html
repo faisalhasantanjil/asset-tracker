@@ -1,5 +1,4 @@
 {% extends 'asset/base.html' %}
-{% load static %}
 
 {% block content %}
 <div class="container mt-5 ">
@@ -31,10 +30,9 @@
                 <td>{{asset.return_date}}</td>
                 <td>{{asset.status}}</td>
                 <td>
-                    
-                        <button class="btn btn-secondary"><a
-                            href="{% url 'assign_asset_details' asset.id %}" class="text-decoration-none"
-                            style="color: black;"> View details</a></button>
+                    <button class="btn btn-secondary"><a
+                        href="{% url 'assign_asset_details' asset.id %}" class="text-decoration-none"
+                        style="color: black;"> View details</a></button>
                     
                 </td>
             </tr>

@@ -10,6 +10,8 @@ from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+#Registration for Company
 def signup(request):
     form_a = UserForm()
     form_b = CompanyForm()
@@ -30,32 +32,29 @@ def signup(request):
 
 # Login to system
 def signin(request):
+    #if user is already logged in it will redirect to home page
+    if request.user.is_authenticated:
+        return render(request, 'asset/home.html')
     if request.method == 'POST':
         username = request.POST['email']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('tempo')
+            return redirect('view_assign_asset')
         else:
             return redirect('signin')
 
     return render(request, 'asset/signin.html')
 
-#user login or not checking
-#@login_required(login_url='signin')
-def tempo(request):
-    user= request.user
-    context = {
-        'user': user
-    }
-    return render(request, 'asset/temp.html')
 
 # Logout
 def signout(request):
     logout(request)
     return redirect('signin')
 
+#Company add identity of their employee
+@login_required(login_url='signin')
 def addemployee(request):
     form = EmployeeForm()
     #form.fields['start_date'].widget = DateTimePickerInput()
@@ -72,7 +71,8 @@ def addemployee(request):
     }
     return render(request, 'asset/addemployee.html', context)
 
-
+# Check List of employee added
+@login_required(login_url='signin')
 def employeelist(request):
     company = CompanyInformation.objects.get(user=request.user.id)
     employees = EmployeeInformation.objects.filter(company=company.id)
@@ -82,6 +82,8 @@ def employeelist(request):
     }
     return render(request, 'asset/viewEmployee.html', context)
 
+# assets delegated to a specific employee
+@login_required(login_url='signin')
 def employeedetails(request, pk):
     company = CompanyInformation.objects.get(user=request.user.id)
     employee = get_object_or_404(EmployeeInformation,id=pk,company=company)
@@ -95,6 +97,8 @@ def employeedetails(request, pk):
 
     return render(request, 'asset/employeeDetails.html', context)
 
+#delegate asset to Employee
+@login_required(login_url='signin')
 def assign_asset(request):
     company = CompanyInformation.objects.get(user=request.user.id)
     employees = EmployeeInformation.objects.filter(company=company.id)
@@ -121,6 +125,8 @@ def assign_asset(request):
     }
     return render(request, 'asset/assignAsset.html', context)
 
+# view all delegated asset
+@login_required(login_url='signin')
 def view_assigned_asset(request):
     company = CompanyInformation.objects.get(user=request.user.id)
     assets = AssetTrack.objects.filter(company=company.id)
@@ -130,6 +136,8 @@ def view_assigned_asset(request):
     }
     return render(request, 'asset/view_assign_asset.html', context)
 
+#update delgated asset
+@login_required(login_url='signin')
 def assigned_asset_details(request,pk):
     company = CompanyInformation.objects.get(user=request.user.id)
     asset = get_object_or_404(AssetTrack,id=pk,company=company)

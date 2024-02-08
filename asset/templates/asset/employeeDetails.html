@@ -1,17 +1,50 @@
 {% extends 'asset/base.html' %}
+{% block title %}
+    <title>Add Employee Name</title>
+{% endblock title %}
 
 {% block content %}
-<div class="w-50 mx-auto d-flex justify-content-center m-5">
+<div class="w-50 mx-auto m-5">
     
-    <h1>Employee Details:{{employee.name}} </h1>
-    <p>{{user.email}}</p>
-    <button><a href= {% url "signout" %} >Logout</a></button>
-    {% if user.is_authenticated %}
-Hi {{ user.username }}!
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'signin' %}">Log In</a>
-{% endif %}
+    <h5>Employee Name: <span class="lead">{{employee.name}}</span> </h5>
+    <p class="h2 text-center text-decoration-underline pb-3">List of assigned Assets</p>
+    
+    <table class="table table-striped w-75 mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Asset Name</th>
+                <th scope="col">Asset Category</th>
+                <th scope="col">Empoyee Name</th>
+                <th scope="col">Delegated date</th>
+                <th scope="col">Delegated time</th>
+                <th scope="col">Returned Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">More Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset in assets %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{asset.name}}</td>
+                <td>{{asset.category}}</td>
+                <td>{{asset.employee}}</td>
+                <td>{{asset.assign_date}}</td>
+                <td>{{asset.assign_time}}</td>
+                <td>{{asset.return_date}}</td>
+                <td>{{asset.status}}</td>
+                <td>
+                    <button class="btn btn-secondary"><a
+                        href="{% url 'assign_asset_details' asset.id %}" class="text-decoration-none"
+                        style="color: black;"> View details</a></button>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
 </div>
 
 {% endblock content %}s

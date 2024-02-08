@@ -1,4 +1,7 @@
 {% extends 'asset/base.html' %}
+{% block title %}
+    <title>Delegate Asset</title>
+{% endblock title %}
 
 {% block content %}
 
@@ -6,7 +9,6 @@
     <form action="" method="post">
         {% csrf_token %}
         <label for="employee">Select Employee:</label>
-
         <select name="employee" id="employee">
             <option value="">--Select--</option>
             {% for employee in employees %}
