@@ -132,9 +132,16 @@ def view_assigned_asset(request):
 
 def assigned_asset_details(request,pk):
     company = CompanyInformation.objects.get(user=request.user.id)
-    assets = AssetTrack.objects.filter(company=company.id)
+    asset = get_object_or_404(AssetTrack,id=pk,company=company)
+    form = AssetUpdateForm(request.POST or None, instance=asset)
+    
+    if form.is_valid():
+        form.save()
+        return redirect('view_assign_asset')
 
+    
     context = {
-        'assets': assets
+        'asset': asset,
+        'form':form
     }
-    return render(request, 'asset/view_assign_asset.html', context)
+    return render(request, 'asset/update_assign_asset.html', context)

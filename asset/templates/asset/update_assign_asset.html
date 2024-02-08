@@ -1,0 +1,14 @@
+{% extends 'asset/base.html' %}
+
+{% block content %}
+<div class="w-50 mx-auto d-flex justify-content-center m-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Save">
+
+    </form>
+    
+</div>
+
+{% endblock content %}s
