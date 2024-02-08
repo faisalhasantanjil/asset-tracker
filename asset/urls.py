@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit-employee/', views.addemployee, name='editemployee'),
     path('view-employee/', views.employeelist, name='employeelist'),
     path('view-employee/<str:pk>', views.employeedetails, name='employeedetails'),
+    path('assign-asset', views.assign_asset, name='assign_asset'),
 ]

@@ -32,6 +32,7 @@ class AssetAssignForm(ModelForm):
         model = AssetTrack
         exclude = ("company","employee","return_date","return_time","return_condition","return_condition_log","status",)
 
+        
 # This form will be used to update assigned asset of an employee
 class AssetUpdateForm(ModelForm):
 

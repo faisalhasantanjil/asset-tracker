@@ -1,0 +1,21 @@
+{% extends 'asset/base.html' %}
+
+{% block content %}
+
+<div class="w-50 mx-auto mt-5 border rounded">
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="employee">Select Employee:</label>
+
+        <select name="employee" id="employee">
+            <option value="">--Select--</option>
+            {% for employee in employees %}
+                <option value={{employee.id}}>{{employee.name}}({{employee.email}})  </option>            
+            {% endfor %}
+        </select>
+        {{form.as_p}}
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+{% endblock content %}s

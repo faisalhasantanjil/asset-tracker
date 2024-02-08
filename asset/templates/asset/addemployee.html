@@ -1,22 +1,11 @@
 {% extends 'asset/base.html' %}
 
 {% block content %}
-<div class="w-50 mx-auto d-flex justify-content-center m-5">
-    
-    {% if user.is_authenticated %}
-        Hi {{ user.username }}!
-        <button><a href= {% url "signout" %} >Logout</a></button>
-        {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'signin' %}">Log In</a>
-        {% endif %}
-</div>
 
 <div class="w-50 mx-auto mt-5 border rounded">
     <form action="" method="post">
         {% csrf_token %}
-        {{form.media}}
-        {#  {% bootstrap_form form %}#}
+        
         {{form.as_table}}
         <input type="submit" value="Save">
 

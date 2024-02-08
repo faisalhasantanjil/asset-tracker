@@ -94,3 +94,25 @@ def employeedetails(request, pk):
     }
 
     return render(request, 'asset/employeeDetails.html', context)
+
+def assign_asset(request):
+    company = CompanyInformation.objects.get(user=request.user.id)
+    employees = EmployeeInformation.objects.filter(company=company.id)
+    
+    form = AssetAssignForm()
+    #form.fields['start_date'].widget = DateTimePickerInput()
+    if request.method == 'POST':
+        form = AssetAssignForm(request.POST)
+        request.POST['email']
+        form.instance.company = CompanyInformation.objects.get(
+            user=request.user.id)
+        form.instance.employee = request.POST['employee']
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path_info)
+
+    context = {
+        'form': form,
+        'employees': employees,
+    }
+    return render(request, 'asset/assignAsset.html', context)
