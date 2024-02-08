@@ -54,12 +54,12 @@ class AssetTrack (models.Model):
         EmployeeInformation, on_delete=models.CASCADE, blank=True, null=True)
     assign_date = models.DateTimeField(blank=True, null=True)
     assign_time = models.TimeField(
-        blank=True, null=True, default='Not Mentioned')
+        blank=True, null=True)
     initial_condition = models.CharField(max_length=20, null=True, blank=True, choices=CONDITION)
     initial_condition_log = models.CharField(max_length=500, blank=True, null=True, default='')
     return_date = models.DateTimeField(blank=True, null=True)
     return_time = models.TimeField(
-        blank=True, null=True, default='Not Mentioned')
+        blank=True, null=True)
     return_condition = models.CharField(max_length=20, null=True, blank=True, choices=CONDITION)
     return_condition_log = models.CharField(max_length=500, blank=True, null=True, default='')
     status = models.CharField(max_length=20, null=True, blank=True, choices=STATUS, default='Pending')

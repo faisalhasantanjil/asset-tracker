@@ -32,6 +32,15 @@ class AssetAssignForm(ModelForm):
         model = AssetTrack
         exclude = ("company","employee","return_date","return_time","return_condition","return_condition_log","status",)
 
+        widgets = {
+            'assign_date': DateInput(attrs={'type': 'date'}),
+            'assign_time': TimeInput(attrs={'type': 'time'}),
+        }
+        labels = {
+            "name": "Asset name",
+            "category": "Asset Category",
+        }
+        
         
 # This form will be used to update assigned asset of an employee
 class AssetUpdateForm(ModelForm):

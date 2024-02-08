@@ -103,10 +103,10 @@ def assign_asset(request):
     #form.fields['start_date'].widget = DateTimePickerInput()
     if request.method == 'POST':
         form = AssetAssignForm(request.POST)
-        request.POST['email']
+        employee_id = request.POST['employee']
         form.instance.company = CompanyInformation.objects.get(
             user=request.user.id)
-        form.instance.employee = request.POST['employee']
+        form.instance.employee = EmployeeInformation.objects.get(id=employee_id)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(request.path_info)
@@ -116,3 +116,11 @@ def assign_asset(request):
         'employees': employees,
     }
     return render(request, 'asset/assignAsset.html', context)
+
+'''
+    form.instance.employee = request.POST['employee']
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.path_info)
+    
+'''
