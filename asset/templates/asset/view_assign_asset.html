@@ -1,0 +1,48 @@
+{% extends 'asset/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 ">
+    <p class="h2 text-center text-decoration-underline pb-3">List of All assigned Asset</p>
+    
+    <table class="table table-striped w-75 mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Asset Name</th>
+                <th scope="col">Asset Category</th>
+                <th scope="col">Empoyee Name</th>
+                <th scope="col">Delegated date</th>
+                <th scope="col">Delegated time</th>
+                <th scope="col">Returned Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">More Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asset in assets %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{asset.name}}</td>
+                <td>{{asset.category}}</td>
+                <td>{{asset.employee}}</td>
+                <td>{{asset.assign_date}}</td>
+                <td>{{asset.assign_time}}</td>
+                <td>{{asset.return_date}}</td>
+                <td>{{asset.status}}</td>
+                <td>
+                    
+                        <button class="btn btn-secondary"><a
+                            href="{% url 'assign_asset_details' asset.id %}" class="text-decoration-none"
+                            style="color: black;"> View details</a></button>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+
+{% endblock content %}

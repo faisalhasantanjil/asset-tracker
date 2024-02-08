@@ -100,15 +100,19 @@ def assign_asset(request):
     employees = EmployeeInformation.objects.filter(company=company.id)
     
     form = AssetAssignForm()
-    #form.fields['start_date'].widget = DateTimePickerInput()
+    
     if request.method == 'POST':
         form = AssetAssignForm(request.POST)
+        # Get employee ID from from field employee
         employee_id = request.POST['employee']
+        # set value for company and employee field in the model
         form.instance.company = CompanyInformation.objects.get(
             user=request.user.id)
         form.instance.employee = EmployeeInformation.objects.get(id=employee_id)
+        
         if form.is_valid():
             form.save()
+            # return to the same path
             return HttpResponseRedirect(request.path_info)
 
     context = {
@@ -117,10 +121,20 @@ def assign_asset(request):
     }
     return render(request, 'asset/assignAsset.html', context)
 
-'''
-    form.instance.employee = request.POST['employee']
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.path_info)
-    
-'''
+def view_assigned_asset(request):
+    company = CompanyInformation.objects.get(user=request.user.id)
+    assets = AssetTrack.objects.filter(company=company.id)
+
+    context = {
+        'assets': assets
+    }
+    return render(request, 'asset/view_assign_asset.html', context)
+
+def assigned_asset_details(request,pk):
+    company = CompanyInformation.objects.get(user=request.user.id)
+    assets = AssetTrack.objects.filter(company=company.id)
+
+    context = {
+        'assets': assets
+    }
+    return render(request, 'asset/view_assign_asset.html', context)
